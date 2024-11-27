@@ -14,13 +14,13 @@ export default function QrScanner() {
         qrbox: 250,
         supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
       },
-      false // Disable verbose logging
+      false
     );
 
     scanner.render(
       (decodedText) => {
         setScannedData(decodedText);
-        scanner.clear(); // Stop scanning after a successful scan
+        scanner.clear();
       },
       (err) => {
         setError(`Error: ${err}`);
@@ -46,17 +46,17 @@ export default function QrScanner() {
   };
 
   return (
-    <div>
-      <h2>Scan QR Code</h2>
-      <div id="qr-reader" style={{ width: "100%" }}></div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <h2 className="text-2xl font-semibold mb-4 text-black">Scan QR Code</h2>
+      <div id="qr-reader" className="w-full max-w-md bg-white p-4 rounded shadow-md"></div>
       <input
         type="file"
         accept="image/*"
         onChange={handleImageUpload}
-        style={{ marginTop: "10px" }}
+        className="mt-4 p-2 border border-gray-300 rounded text-black"
       />
-      {scannedData && <p>Scanned Data: {scannedData}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {scannedData && <p className="mt-4 text-green-600 text-black">Scanned Data: {scannedData}</p>}
+      {error && <p className="mt-4 text-red-600">{error}</p>}
     </div>
   );
 }
