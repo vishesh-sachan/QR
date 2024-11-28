@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import { useState } from "react";
 import QRCode from "qrcode";
+import Image from "next/image";
 
 export default function QrGenerator() {
   const [text, setText] = useState<string>("");
@@ -10,10 +11,10 @@ export default function QrGenerator() {
     if (!text) return alert("Please enter some text!");
     try {
       const options = {
-        width: 200,  
+        width: 200,
         margin: 2,
       };
-      const url = await QRCode.toDataURL(text,options);
+      const url = await QRCode.toDataURL(text, options);
       setQrCodeUrl(url);
     } catch (err) {
       console.error("Failed to generate QR code", err);
@@ -23,7 +24,9 @@ export default function QrGenerator() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
       <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-lg">
-        <h2 className="text-2xl font-semibold text-center mb-4 text-black">Create QR Code</h2>
+        <h2 className="text-2xl font-semibold text-center mb-4 text-black">
+          Create QR Code
+        </h2>
         <div className="flex justify-center mb-4">
           <input
             type="text"
@@ -44,7 +47,12 @@ export default function QrGenerator() {
         {qrCodeUrl && (
           <div className="text-center">
             <h3 className="text-xl font-medium mb-2 text-black">Your QR Code:</h3>
-            <img src={qrCodeUrl} alt="Generated QR Code" className="mx-auto" />
+            <Image
+              src={qrCodeUrl}
+              alt="Generated QR Code"
+              width={200}
+              height={200}
+            />
           </div>
         )}
       </div>
