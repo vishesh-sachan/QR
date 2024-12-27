@@ -42,6 +42,7 @@ export default function QrScanner() {
       setScannedData(result);
     } catch (err) {
       setError("Error scanning image");
+      console.error("Failed to generate QR code", err);
     }
   };
 
